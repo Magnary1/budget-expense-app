@@ -47,7 +47,7 @@ struct TabBarView: View {
 struct mergedBudgetExpenseView: View {
     @State private var selectedView: ViewType = .budget
     @State private var showingAddForm = false
-    
+    @State private var activeSheet: ActiveSheet?
     enum ViewType {
         case budget, expense
     }
@@ -59,7 +59,12 @@ struct mergedBudgetExpenseView: View {
                     .padding(.bottom, -8)
                 Spacer()
                 Button(action: {
-                    showingAddForm.toggle()
+                    switch selectedView {
+                    case .budget:
+                        showingAddForm.toggle()
+                    case .expense:
+                        activeSheet = .addExpense
+                    }
                 }, label: {
                     Image(systemName: "plus")
                         .resizable()
@@ -80,7 +85,7 @@ struct mergedBudgetExpenseView: View {
             case .budget:
                 BudgetView(showingAddForm: $showingAddForm)
             case .expense:
-                ExpenseView(showingAddForm: $showingAddForm)
+                ExpenseView(activeSheet: $activeSheet)
             }
         }
     }
