@@ -86,7 +86,8 @@ struct EditView: View {
     @State private var expenseDate: Date
     @EnvironmentObject var sharedData: SharedData
     @State private var editingExpense: Expense?
-    
+    @Environment(\.presentationMode) var presentationMode
+
     init(showingForm: Binding<Bool>) {
         _showingForm = showingForm
         _expenseName = State(initialValue: "")
@@ -159,7 +160,7 @@ struct EditView: View {
                     expenseAmount = ""
                     expenseDate = Date()
                     editingExpense = nil  // Reset the editingExpense state
-                    showingForm.toggle()
+                    presentationMode.wrappedValue.dismiss()
                 }
             }) {
                 Text("Save")

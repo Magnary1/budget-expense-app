@@ -22,6 +22,15 @@ class SharedData: ObservableObject {
         Expense(expenseName: "Movie", category: "Entertainment", date: Date(), amount: 50.25),
         Expense(expenseName: "Concert", category: "Entertainment", date: Date(), amount: 75.00)
     ]
+    
+    @Published var totalIncome: Double = 2000.00
+    
+    var incomeLeft: Double {
+        let sumOfCategoryBudgets = categories.reduce(0) { (result, category) -> Double in
+            return result + category.budget
+        }
+        return totalIncome - sumOfCategoryBudgets
+    }
 }
 
 

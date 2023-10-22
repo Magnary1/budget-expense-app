@@ -17,9 +17,18 @@ struct BudgetView: View {
     @Binding var showingAddForm: Bool
     @State private var selectedCategory: Category?
     @EnvironmentObject var sharedData: SharedData
+    @State private var editingBudget: Bool = false
+    @State private var inputBudget: String = ""
+
 
     var body: some View {
         VStack {
+            TotalBudgetView(
+                totalBudget: $sharedData.totalIncome,
+                inputBudget: $inputBudget,
+                editingBudget: $editingBudget
+            )
+            .padding(.bottom)
             List {
                 ForEach(sharedData.categories) { category in
                     CategoryRowView(category: category, selectedCategory: $selectedCategory)
@@ -85,6 +94,7 @@ struct EditCategoryView: View {
             Text(categoryToEdit == nil ? "Add Category" : "Edit Category")
                 .font(.largeTitle)
                 .fontWeight(.bold)
+            Text("Income not allocated: $\(String(format: "%.2f", sharedData.incomeLeft))")
             Spacer()
 
             TextField("Category Type", text: $categoryType)
@@ -120,5 +130,59 @@ struct EditCategoryView: View {
         }
         .padding(20)
         Spacer()
+    }
+}
+
+
+struct TotalBudgetView: View {
+    @Binding var totalBudget: Double
+    @Binding var inputBudget: String
+    @Binding var editingBudget: Bool
+
+    var body: some View {
+        HStack {
+            Text("Total Monthly Income:")
+                .lineLimit(1)
+                .truncationMode(.tail)
+                .fixedSize(horizontal: true, vertical: false)
+            Spacer()
+            if editingBudget {
+                Button(action: {
+                    editingBudget = false
+                }) {
+                    Image(systemName: "x.circle")
+                        .foregroundColor(.red)
+                        .padding(4)
+                }
+                
+                TextField("$\(String(format: "%.2f", totalBudget))", text: $inputBudget)
+                    .keyboardType(.decimalPad)
+                    .padding(4)
+                    .background(Color.secondary.opacity(0.1))
+                    .cornerRadius(5)
+                    .onAppear {
+                        inputBudget = "\(totalBudget)"
+                    }
+
+                Button(action: {
+                    if let newBudget = Double(inputBudget) {
+                        totalBudget = newBudget
+                        editingBudget = false
+                    }
+                }) {
+                    Image(systemName: "checkmark.circle")
+                        .foregroundColor(.green)
+                        .padding(4)
+                }
+            } else {
+                Text("$\(String(format: "%.2f", totalBudget))")
+                    .underline()
+                    .onTapGesture {
+                        editingBudget.toggle()
+                    }
+            }
+        }
+        .padding(.horizontal)
+        .frame(height: 50)
     }
 }

@@ -30,7 +30,7 @@ struct TabBarView: View {
                     Label("Dashboard", systemImage: "house.fill")
                 }
             
-            mergedBudgetExpenseView()
+            MergedBudgetExpenseView()
                 .tabItem {
                     Label("Money?", systemImage: "dollarsign.circle.fill")
                 }
@@ -44,7 +44,7 @@ struct TabBarView: View {
 }
 
 
-struct mergedBudgetExpenseView: View {
+struct MergedBudgetExpenseView: View {
     @State private var selectedView: ViewType = .budget
     @State private var showingAddForm = false
     @State private var activeSheet: ActiveSheet?
@@ -55,7 +55,7 @@ struct mergedBudgetExpenseView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                TitleBarView(title: "Budget")
+                TitleBarView(title: selectedView == .budget ? "Budget" : "Expenses")
                     .padding(.bottom, -8)
                 Spacer()
                 Button(action: {
@@ -76,7 +76,7 @@ struct mergedBudgetExpenseView: View {
 
             Picker("", selection: $selectedView) {
                 Text("Budget").tag(ViewType.budget)
-                Text("Expense").tag(ViewType.expense)
+                Text("Expenses").tag(ViewType.expense)
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding()
