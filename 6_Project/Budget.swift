@@ -19,7 +19,8 @@ struct BudgetView: View {
     @EnvironmentObject var sharedData: SharedData
     @State private var editingBudget: Bool = false
     @State private var inputBudget: String = ""
-
+    @State private var showingAlert = false
+    @State private var indexSetToDelete: IndexSet?
 
     var body: some View {
         VStack {
@@ -46,10 +47,33 @@ struct BudgetView: View {
             EditCategoryView(showingForm: .constant(true), category: category)
                 .environmentObject(sharedData)
         }
+        .alert(isPresented: $showingAlert) {
+            Alert(
+                title: Text("Warning"),
+                message: Text("This category is associated with some expenses. Do you really want to delete it?"),
+                primaryButton: .destructive(Text("Delete")) {
+                    actuallyDeleteCategory()
+                },
+                secondaryButton: .cancel()
+            )
+        }
     }
 
     func deleteCategory(at offsets: IndexSet) {
-        sharedData.categories.remove(atOffsets: offsets)
+        guard let index = offsets.first else { return }
+
+        if sharedData.checkIfCategoryIsUsedByExpense(categoryId: sharedData.categories[index].id) {
+            showingAlert = true
+            indexSetToDelete = offsets
+        } else {
+            sharedData.categories.remove(atOffsets: offsets)
+        }
+    }
+
+    func actuallyDeleteCategory() {
+        guard let offsets = indexSetToDelete else { return }
+
+        sharedData.categories.remove(atOffsets: offsets)        
     }
 }
 

@@ -11,7 +11,7 @@ import SwiftUI
 struct Expense: Identifiable {
     var id = UUID()
     var expenseName: String
-    var category: String
+    var categoryUUID: UUID
     var date: Date
     var amount: Double
 }
@@ -43,6 +43,7 @@ struct ExpenseView: View {
                         .onTapGesture {
                             self.activeSheet = .editExpense(sharedData.expenses[index])
                         }
+                        .environmentObject(sharedData)
                 }
                 .onDelete(perform: deleteExpense)
             }
@@ -67,14 +68,33 @@ struct ExpenseView: View {
 
 struct ExpenseRowView: View {
     var expense: Expense
-    
+    @EnvironmentObject var sharedData: SharedData
+
     var body: some View {
         HStack {
-            Text(expense.expenseName)
+            VStack(alignment: .leading) {
+                Text(expense.expenseName)
+                Text(sharedData.getCategoryTypeForExpense(expense))
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+            }
+            
             Spacer()
-            Text("$\(String(format: "%.2f", expense.amount))")
+            
+            VStack(alignment: .trailing) {
+                Text("$\(String(format: "%.2f", expense.amount))")
+                Text(dateFormatter.string(from: expense.date))
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+            }
         }
         .padding()
+    }
+        
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd"
+        return formatter
     }
 }
 
@@ -101,7 +121,7 @@ struct EditView: View {
         _showingForm = showingForm
         _expenseName = State(initialValue: expense.expenseName)
         _expenseAmount = State(initialValue: String(expense.amount))
-        _selectedCategoryIndex = State(initialValue: SharedData().categories.firstIndex { $0.type == expense.category } ?? 0)
+        _selectedCategoryIndex = State(initialValue: 0)
         _expenseDate = State(initialValue: expense.date)
         _editingExpense = State(initialValue: expense)  // Set the expense being edited
     }
@@ -135,6 +155,9 @@ struct EditView: View {
                 .pickerStyle(MenuPickerStyle())
                 .frame(maxWidth: .infinity, alignment: .center)
             }
+            .onAppear {
+                    selectedCategoryIndex = sharedData.categories.firstIndex { $0.id == editingExpense?.categoryUUID } ?? 0
+                }
 
             DatePicker("Date", selection: $expenseDate, displayedComponents: [.date])
                 .font(.headline)
@@ -147,11 +170,11 @@ struct EditView: View {
                         // Update the existing expense
                         sharedData.expenses[index].expenseName = expenseName
                         sharedData.expenses[index].amount = amount
-                        sharedData.expenses[index].category = sharedData.categories[selectedCategoryIndex].type
+                        sharedData.expenses[index].categoryUUID = sharedData.categories[selectedCategoryIndex].id
                         sharedData.expenses[index].date = expenseDate
                     } else {
                         // Add a new expense
-                        let newExpense = Expense(expenseName: expenseName, category: sharedData.categories[selectedCategoryIndex].type, date: expenseDate, amount: amount)
+                        let newExpense = Expense(expenseName: expenseName, categoryUUID: sharedData.categories[selectedCategoryIndex].id, date: expenseDate, amount: amount)
                         sharedData.expenses.append(newExpense)
                     }
                     

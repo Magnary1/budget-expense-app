@@ -6,21 +6,22 @@
 //
 
 import SwiftUI
+let uuids = (1...5).map { _ in UUID() }
 
 class SharedData: ObservableObject {
     @Published var categories: [Category] = [
-        Category(type: "Rent", budget: 1200.00),
-        Category(type: "Groceries", budget: 250.00),
-        Category(type: "Utilities", budget: 150.00),
-        Category(type: "Entertainment", budget: 75.00)
+        Category(id: uuids[0], type: "Living", budget: 1200.00),
+        Category(id: uuids[1], type: "Groceries", budget: 250.00),
+        Category(id: uuids[2], type: "Utilities", budget: 150.00),
+        Category(id: uuids[3], type: "Entertainment", budget: 75.00)
     ]
     
     @Published var expenses: [Expense] = [
-        Expense(expenseName: "Groceries", category: "Groceries", date: Date(), amount: 100.50),
-        Expense(expenseName: "Rent", category: "Rent", date: Date(), amount: 1500.00),
-        Expense(expenseName: "Utilities", category: "Utilities", date: Date(), amount: 200.75),
-        Expense(expenseName: "Movie", category: "Entertainment", date: Date(), amount: 50.25),
-        Expense(expenseName: "Concert", category: "Entertainment", date: Date(), amount: 75.00)
+        Expense(expenseName: "H-E-B", categoryUUID: uuids[1], date: Date(), amount: 100.50),
+        Expense(expenseName: "Rent", categoryUUID: uuids[0], date: Date(), amount: 1000.00),
+        Expense(expenseName: "Electricity", categoryUUID:  uuids[2], date: Date(), amount: 200.75),
+        Expense(expenseName: "Movie", categoryUUID:  uuids[3], date: Date(), amount: 50.25),
+        Expense(expenseName: "Concert", categoryUUID:  uuids[3], date: Date(), amount: 75.00)
     ]
     
     @Published var totalIncome: Double = 2000.00
@@ -30,6 +31,22 @@ class SharedData: ObservableObject {
             return result + category.budget
         }
         return totalIncome - sumOfCategoryBudgets
+    }
+    
+    func getCategoryTypeForExpense(_ expense: Expense) -> String {
+        if let category = categories.first(where: { $0.id == expense.categoryUUID }) {
+            return category.type
+        }
+        return "None"
+    }
+    
+    func checkIfCategoryIsUsedByExpense(categoryId: UUID) -> Bool {
+        for expense in expenses {
+            if expense.categoryUUID == categoryId {
+                return true
+            }
+        }
+        return false
     }
 }
 
