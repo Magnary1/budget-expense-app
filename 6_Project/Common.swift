@@ -56,7 +56,6 @@ struct MergedBudgetExpenseView: View {
         VStack(spacing: 0) {
             HStack {
                 TitleBarView(title: selectedView == .budget ? "Budget" : "Expenses")
-                    .padding(.bottom, -8)
                 Spacer()
                 Button(action: {
                     switch selectedView {

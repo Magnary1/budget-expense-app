@@ -8,6 +8,12 @@
 import SwiftUI
 let uuids = (1...5).map { _ in UUID() }
 
+struct SavingsGoal {
+    var label: String = ""
+    var totalAmount: Double = 0.0
+    var savedAmount: Double = 0.0
+}
+
 class SharedData: ObservableObject {
     @Published var categories: [Category] = [
         Category(id: uuids[0], type: "Living", budget: 1200.00),
@@ -21,11 +27,12 @@ class SharedData: ObservableObject {
         Expense(expenseName: "Rent", categoryUUID: uuids[0], date: Date(), amount: 1000.00),
         Expense(expenseName: "Electricity", categoryUUID:  uuids[2], date: Date(), amount: 200.75),
         Expense(expenseName: "Movie", categoryUUID:  uuids[3], date: Date(), amount: 50.25),
-        Expense(expenseName: "Concert", categoryUUID:  uuids[3], date: Date(), amount: 75.00)
+        Expense(expenseName: "Concert", categoryUUID:  uuids[3], date: Date(), amount: 175.00)
     ]
     
     @Published var totalIncome: Double = 2000.00
-    
+    @Published var savingsGoal: SavingsGoal = SavingsGoal()
+
     var incomeLeft: Double {
         let sumOfCategoryBudgets = categories.reduce(0) { (result, category) -> Double in
             return result + category.budget
@@ -47,6 +54,10 @@ class SharedData: ObservableObject {
             }
         }
         return false
+    }
+
+    var totalExpenses: Double {
+        return expenses.reduce(0) { $0 + $1.amount }
     }
 }
 
