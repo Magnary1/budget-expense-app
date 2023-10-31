@@ -7,8 +7,21 @@
 import SwiftUI
 
 struct GraphView: View {
-    @EnvironmentObject var sharedData: SharedData
+    
 
+    var body: some View {
+        TabView {
+            PView()
+        }
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+    }
+}
+
+
+
+struct PView: View {
+    @EnvironmentObject var sharedData: SharedData
+    
     var body: some View {
         let totalIncome = (sharedData.totalIncome, Color.red)
         let totalExpenses = (sharedData.totalExpenses, Color.blue)
@@ -17,40 +30,59 @@ struct GraphView: View {
         
         let total = data.reduce(0) { $0 + $1.0 }
         let percentages = data.map { $0.0 / total }
+        VStack {
+            
+        TitleBarView(title: "Graph")
+            .background(Color.secondary.opacity(0.1))
+        Spacer()
         
-        return VStack {
-            TitleBarView(title: "Graph")
-                .background(Color.secondary.opacity(0.1))
-            Spacer()
-            
-            VStack {
-                ColorBox(color: .red, text: "= Total Income", percentage: percentages[0])
-                ColorBox(color: .blue, text: "= Total Expenses", percentage: percentages[1])
-                ColorBox(color: .green, text: "= Income Left", percentage: percentages[2])
-            }
-            
-            PieChartView(slices: data)
-            Spacer()
-        }
+        VStack {
+                            ColorBox(color: .red, text: "= Total Income", number: sharedData.totalIncome, percentage: percentages[0])
+                            ColorBox(color: .blue, text: "= Total Expenses", number: sharedData.totalExpenses, percentage: percentages[1])
+                            ColorBox(color: .green, text: "= Income Left", number: sharedData.incomeLeft, percentage: percentages[2])
+                        }
+        
+        PieChartView(slices: data)
+        Spacer()
+    }
     }
 }
+
+
 
 struct ColorBox: View {
     let color: Color
     let text: String
-    let percentage: Double // Add percentage property
+    let number: Double
+    let percentage: Double
 
     var body: some View {
-        HStack {
-            Rectangle()
-                .fill(color)
-                .frame(width: 20, height: 20)
-
-            Text("\(text) \(String(format: "%.1f%%", percentage * 100))") // Display percentage
-                .multilineTextAlignment(.center)
-        }
+        
+            VStack {
+                
+                HStack {
+                    
+                Rectangle()
+                    .fill(color)
+                    .frame(width: 20, height: 20)
+                Text("\(text)")
+                    .multilineTextAlignment(.center)
+                
+                Text("$\(String(format: "%.2f", number))")
+                    .multilineTextAlignment(.leading)
+                Text("(\(String(format: "%.1f%%", percentage * 100)))")
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.trailing)
+                }
+                    
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(12)
+        
     }
 }
+
+
 
 
 struct PieChartView: View {
