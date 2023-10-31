@@ -15,11 +15,11 @@
 		144564442AE0BA3700FA3001 /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144564432AE0BA3700FA3001 /* Budget.swift */; };
 		144564462AE0BA4700FA3001 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144564452AE0BA4700FA3001 /* Expense.swift */; };
 		144564482AE0BA4E00FA3001 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144564472AE0BA4E00FA3001 /* Common.swift */; };
-		14965DD02AE1789100DDC5D4 /* Other.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14965DCF2AE1789100DDC5D4 /* Other.swift */; };
+		14965DD02AE1789100DDC5D4 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14965DCF2AE1789100DDC5D4 /* Graph.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		144564302AE0B9BD00FA3001 /* 6_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 6_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		144564302AE0B9BD00FA3001 /* Project_6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project_6.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		144564332AE0B9BD00FA3001 /* __ProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __ProjectApp.swift; sourceTree = "<group>"; };
 		144564352AE0B9BD00FA3001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		144564372AE0B9BE00FA3001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -28,7 +28,7 @@
 		144564432AE0BA3700FA3001 /* Budget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
 		144564452AE0BA4700FA3001 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		144564472AE0BA4E00FA3001 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
-		14965DCF2AE1789100DDC5D4 /* Other.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Other.swift; sourceTree = "<group>"; };
+		14965DCF2AE1789100DDC5D4 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +45,7 @@
 		144564272AE0B9BD00FA3001 = {
 			isa = PBXGroup;
 			children = (
-				144564322AE0B9BD00FA3001 /* 6_Project */,
+				144564322AE0B9BD00FA3001 /* Project_6 */,
 				144564312AE0B9BD00FA3001 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,12 +53,12 @@
 		144564312AE0B9BD00FA3001 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				144564302AE0B9BD00FA3001 /* 6_Project.app */,
+				144564302AE0B9BD00FA3001 /* Project_6.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		144564322AE0B9BD00FA3001 /* 6_Project */ = {
+		144564322AE0B9BD00FA3001 /* Project_6 */ = {
 			isa = PBXGroup;
 			children = (
 				144564332AE0B9BD00FA3001 /* __ProjectApp.swift */,
@@ -66,12 +66,12 @@
 				144564412AE0BA2C00FA3001 /* Dashboard.swift */,
 				144564432AE0BA3700FA3001 /* Budget.swift */,
 				144564452AE0BA4700FA3001 /* Expense.swift */,
-				14965DCF2AE1789100DDC5D4 /* Other.swift */,
+				14965DCF2AE1789100DDC5D4 /* Graph.swift */,
 				144564472AE0BA4E00FA3001 /* Common.swift */,
 				144564372AE0B9BE00FA3001 /* Assets.xcassets */,
 				144564392AE0B9BE00FA3001 /* Preview Content */,
 			);
-			path = 6_Project;
+			path = Project_6;
 			sourceTree = "<group>";
 		};
 		144564392AE0B9BE00FA3001 /* Preview Content */ = {
@@ -85,9 +85,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1445642F2AE0B9BD00FA3001 /* 6_Project */ = {
+		1445642F2AE0B9BD00FA3001 /* Project_6 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1445643E2AE0B9BE00FA3001 /* Build configuration list for PBXNativeTarget "6_Project" */;
+			buildConfigurationList = 1445643E2AE0B9BE00FA3001 /* Build configuration list for PBXNativeTarget "Project_6" */;
 			buildPhases = (
 				1445642C2AE0B9BD00FA3001 /* Sources */,
 				1445642D2AE0B9BD00FA3001 /* Frameworks */,
@@ -97,9 +97,9 @@
 			);
 			dependencies = (
 			);
-			name = 6_Project;
+			name = Project_6;
 			productName = 6_Project;
-			productReference = 144564302AE0B9BD00FA3001 /* 6_Project.app */;
+			productReference = 144564302AE0B9BD00FA3001 /* Project_6.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -117,7 +117,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1445642B2AE0B9BD00FA3001 /* Build configuration list for PBXProject "6_Project" */;
+			buildConfigurationList = 1445642B2AE0B9BD00FA3001 /* Build configuration list for PBXProject "Project_6" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -130,7 +130,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1445642F2AE0B9BD00FA3001 /* 6_Project */,
+				1445642F2AE0B9BD00FA3001 /* Project_6 */,
 			);
 		};
 /* End PBXProject section */
@@ -157,7 +157,7 @@
 				144564442AE0BA3700FA3001 /* Budget.swift in Sources */,
 				144564342AE0B9BD00FA3001 /* __ProjectApp.swift in Sources */,
 				144564482AE0BA4E00FA3001 /* Common.swift in Sources */,
-				14965DD02AE1789100DDC5D4 /* Other.swift in Sources */,
+				14965DD02AE1789100DDC5D4 /* Graph.swift in Sources */,
 				144564462AE0BA4700FA3001 /* Expense.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,7 +291,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"6_Project/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Project_6/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -299,6 +299,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -319,7 +320,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"6_Project/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Project_6/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -327,6 +328,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -343,7 +345,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1445642B2AE0B9BD00FA3001 /* Build configuration list for PBXProject "6_Project" */ = {
+		1445642B2AE0B9BD00FA3001 /* Build configuration list for PBXProject "Project_6" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1445643C2AE0B9BE00FA3001 /* Debug */,
@@ -352,7 +354,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1445643E2AE0B9BE00FA3001 /* Build configuration list for PBXNativeTarget "6_Project" */ = {
+		1445643E2AE0B9BE00FA3001 /* Build configuration list for PBXNativeTarget "Project_6" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1445643F2AE0B9BE00FA3001 /* Debug */,
