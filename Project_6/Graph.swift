@@ -8,28 +8,47 @@ import SwiftUI
 
 struct GraphView: View {
     @EnvironmentObject var sharedData: SharedData
-    
-    
-    
-    
-    
+
     var body: some View {
         let totalIncome = (sharedData.totalIncome, Color.red)
         let totalExpenses = (sharedData.totalExpenses, Color.blue)
         let incomeLeft = (sharedData.incomeLeft, Color.green)
         let data = [totalIncome, totalExpenses, incomeLeft]
         
-        VStack {
+        let total = data.reduce(0) { $0 + $1.0 }
+        let percentages = data.map { $0.0 / total }
+        
+        return VStack {
             TitleBarView(title: "Graph")
                 .background(Color.secondary.opacity(0.1))
             Spacer()
+            
+            VStack {
+                ColorBox(color: .red, text: "= Total Income", percentage: percentages[0])
+                ColorBox(color: .blue, text: "= Total Expenses", percentage: percentages[1])
+                ColorBox(color: .green, text: "= Income Left", percentage: percentages[2])
+            }
+            
             PieChartView(slices: data)
             Spacer()
         }
-        
-        
-        
-        
+    }
+}
+
+struct ColorBox: View {
+    let color: Color
+    let text: String
+    let percentage: Double // Add percentage property
+
+    var body: some View {
+        HStack {
+            Rectangle()
+                .fill(color)
+                .frame(width: 20, height: 20)
+
+            Text("\(text) \(String(format: "%.1f%%", percentage * 100))") // Display percentage
+                .multilineTextAlignment(.center)
+        }
     }
 }
 
