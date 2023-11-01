@@ -5,6 +5,7 @@
 //  Created by jonathan school on 10/19/23.
 //
 import SwiftUI
+import Charts
 
 struct GraphView: View {
     
@@ -22,8 +23,54 @@ struct Bview: View {
     @EnvironmentObject var sharedData: SharedData
     
     var body: some View {
-        Text("Hello world")
+        let totalIncomeData = BarChartData(label: "Total Income", value: sharedData.totalIncome)
+        let totalExpensesData = BarChartData(label: "Total Expenses", value: sharedData.totalExpenses)
+        let incomeLeftData = BarChartData(label: "Income Left", value: sharedData.incomeLeft)
+        
+        let barChartData = [totalIncomeData, totalExpensesData, incomeLeftData]
+
+        return BarChartView(data: barChartData)
     }
+}
+
+
+struct BarChartView: View {
+    var data: [BarChartData]
+
+    var body: some View {
+        HStack {
+            ForEach(data, id: \.label) { barData in
+                Chart {
+                    BarMark(
+                        x: .value("Shape Type", barData.label),
+                        y: .value("Total Count", barData.value)
+                    )
+                    
+                }
+                .chartYAxis{
+                    AxisMarks(
+                                    
+                                    values: .stride(by: 200),
+                                    stroke: StrokeStyle(
+                                        lineWidth: 2,
+                                        lineCap: .butt,
+                                        lineJoin: .bevel,
+                                        miterLimit: 1,
+                                        dash: [],
+                                        dashPhase: 1
+                                    )
+                    )
+                }
+                .frame(height: 600)
+            }
+        }
+    }
+}
+
+struct BarChartData: Identifiable {
+    let id = UUID()
+    let label: String
+    let value: Double
 }
 
 
@@ -60,6 +107,7 @@ struct PView: View {
                     LegendItem(color: data.first { $0.0 == category.budget }?.1 ?? .clear, category: category, totalExpenses: totalExpenses)
                 }
             }
+            .padding(12)
 
             PieChartView(slices: data)
 
