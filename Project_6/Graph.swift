@@ -12,8 +12,17 @@ struct GraphView: View {
     var body: some View {
         TabView {
             PView()
+            Bview()
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+    }
+}
+
+struct Bview: View {
+    @EnvironmentObject var sharedData: SharedData
+    
+    var body: some View {
+        Text("Hello world")
     }
 }
 
@@ -21,66 +30,76 @@ struct GraphView: View {
 
 struct PView: View {
     @EnvironmentObject var sharedData: SharedData
-    
-    var body: some View {
-        let totalIncome = (sharedData.totalIncome, Color.red)
-        let totalExpenses = (sharedData.totalExpenses, Color.blue)
-        let incomeLeft = (sharedData.incomeLeft, Color.green)
-        let data = [totalIncome, totalExpenses, incomeLeft]
-        
-        let total = data.reduce(0) { $0 + $1.0 }
-        let percentages = data.map { $0.0 / total }
-        VStack {
-            
-        TitleBarView(title: "Graph")
-            .background(Color.secondary.opacity(0.1))
-        Spacer()
-        
-        VStack {
-                            ColorBox(color: .red, text: "= Total Income", number: sharedData.totalIncome, percentage: percentages[0])
-                            ColorBox(color: .blue, text: "= Total Expenses", number: sharedData.totalExpenses, percentage: percentages[1])
-                            ColorBox(color: .green, text: "= Income Left", number: sharedData.incomeLeft, percentage: percentages[2])
-                        }
-        
-        PieChartView(slices: data)
-        Spacer()
-    }
-    }
-}
-
-
-
-struct ColorBox: View {
-    let color: Color
-    let text: String
-    let number: Double
-    let percentage: Double
 
     var body: some View {
-        
-            VStack {
-                
-                HStack {
-                    
-                Rectangle()
-                    .fill(color)
-                    .frame(width: 20, height: 20)
-                Text("\(text)")
-                    .multilineTextAlignment(.center)
-                
-                Text("$\(String(format: "%.2f", number))")
-                    .multilineTextAlignment(.leading)
-                Text("(\(String(format: "%.1f%%", percentage * 100)))")
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.trailing)
-                }
-                    
+        let knownCategoryColors: [String: Color] = [
+            "Living": .red,
+            "Groceries": .blue,
+            "Utilities": .yellow,
+            "Entertainment": .purple
+        ]
+
+        // Map categories to colors or use a default color for new categories
+        let data: [(Double, Color)] = sharedData.categories.map { category in
+            if let color = knownCategoryColors[category.type] {
+                return (category.budget, color)
+            } else {
+                // You can use a default color for new categories, for example, .pink
+                return (category.budget, .pink)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(12)
-        
+        }
+
+        let totalExpenses = sharedData.totalExpenses
+
+        VStack {
+            TitleBarView(title: "Expense Categories")
+                .background(Color.secondary.opacity(0.1))
+            Spacer()
+            VStack(spacing: 5) {
+                ForEach(sharedData.categories) { category in
+                    LegendItem(color: data.first { $0.0 == category.budget }?.1 ?? .clear, category: category, totalExpenses: totalExpenses)
+                }
+            }
+
+            PieChartView(slices: data)
+
+            Spacer()
+        }
     }
 }
+
+
+
+extension Color {
+    static var random: Color {
+        let red = Double.random(in: 0...1)
+        let green = Double.random(in: 0...1)
+        let blue = Double.random(in: 0...1)
+        return Color(red: red, green: green, blue: blue)
+    }
+}
+
+
+
+struct LegendItem: View {
+    let color: Color
+    let category: Category
+    let totalExpenses: Double
+
+    var body: some View {
+        HStack {
+            Rectangle()
+                .fill(color)
+                .frame(width: 20, height: 20)
+            Text("\(category.type)")
+            Spacer()
+            Text("$\(String(format: "%.2f", category.budget))")
+            Text("(\(String(format: "%.1f%%", (category.budget / totalExpenses) * 100)))")
+                .foregroundColor(.secondary)
+        }
+    }
+}
+
 
 
 
