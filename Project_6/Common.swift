@@ -19,6 +19,7 @@ struct TitleBarView: View {
                 .padding()
             Spacer()
         }
+         
     }
 }
 
@@ -40,6 +41,7 @@ struct TabBarView: View {
                     Label("Graph", systemImage: "list.bullet")
                 }
         }
+         
     }
 }
 
@@ -71,6 +73,7 @@ struct MergedBudgetExpenseView: View {
                         .padding()
                 })
             }
+             
             .background(Color.secondary.opacity(0.1))
 
             Picker("", selection: $selectedView) {
@@ -79,6 +82,7 @@ struct MergedBudgetExpenseView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding()
+             
 
             switch selectedView {
             case .budget:
@@ -87,5 +91,6 @@ struct MergedBudgetExpenseView: View {
                 ExpenseView(activeSheet: $activeSheet)
             }
         }
+         
     }
 }

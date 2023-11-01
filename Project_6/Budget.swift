@@ -39,6 +39,7 @@ struct BudgetView: View {
             }
             .listStyle(PlainListStyle())
         }
+         
         .sheet(isPresented: $showingAddForm, content: {
             EditCategoryView(showingForm: $showingAddForm)
                 .environmentObject(sharedData)
@@ -47,6 +48,8 @@ struct BudgetView: View {
             EditCategoryView(showingForm: .constant(true), category: category)
                 .environmentObject(sharedData)
         }
+         
+        
         .alert(isPresented: $showingAlert) {
             Alert(
                 title: Text("Warning"),
@@ -87,6 +90,7 @@ struct CategoryRowView: View {
             Spacer()
             Text("$\(String(format: "%.2f", category.budget))")
         }
+         
         .padding()
         .contentShape(Rectangle())  // Make entire row tappable
         .onTapGesture {
@@ -94,6 +98,7 @@ struct CategoryRowView: View {
         }
     }
 }
+
 
 struct EditCategoryView: View {
     @Binding var showingForm: Bool
@@ -152,6 +157,7 @@ struct EditCategoryView: View {
                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)))
             }
         }
+         
         .padding(20)
         Spacer()
     }
@@ -206,6 +212,7 @@ struct TotalBudgetView: View {
                     }
             }
         }
+         
         .padding(.horizontal)
         .frame(height: 50)
     }

@@ -8,7 +8,7 @@ import SwiftUI
 import Charts
 
 struct GraphView: View {
-    
+    //.background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
 
     var body: some View {
         TabView {
@@ -16,6 +16,7 @@ struct GraphView: View {
             Bview()
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        //.background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
     }
 }
 
@@ -28,8 +29,13 @@ struct Bview: View {
         let incomeLeftData = BarChartData(label: "Income Left", value: sharedData.incomeLeft)
         
         let barChartData = [totalIncomeData, totalExpensesData, incomeLeftData]
-
-        return BarChartView(data: barChartData)
+        VStack{
+            TitleBarView(title: "Income Vs Expenses")
+                .background(Color.secondary.opacity(0.1))
+            Spacer()
+            BarChartView(data: barChartData)
+            Spacer()
+        }
     }
 }
 
@@ -46,7 +52,9 @@ struct BarChartView: View {
                         y: .value("Total Count", barData.value)
                     )
                     
+                    
                 }
+              
                 .chartYAxis{
                     AxisMarks(
                                     
@@ -61,7 +69,7 @@ struct BarChartView: View {
                                     )
                     )
                 }
-                .frame(height: 600)
+                .frame(height: 550)
             }
         }
     }

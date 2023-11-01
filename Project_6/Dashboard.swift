@@ -22,9 +22,12 @@ struct DashboardView: View {
             Spacer()
             SavingsTrackerView()
         }
+         
 
     }
 }
+
+
 
 struct OverallBudgetMeter: View {
     @EnvironmentObject var sharedData: SharedData

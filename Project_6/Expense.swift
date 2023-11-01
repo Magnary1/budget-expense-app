@@ -49,6 +49,7 @@ struct ExpenseView: View {
             }
             .listStyle(PlainListStyle())
         }
+         
         .sheet(item: $activeSheet) { item in
             switch item {
             case .addExpense:
@@ -78,6 +79,7 @@ struct ExpenseRowView: View {
                     .font(.footnote)
                     .foregroundColor(.gray)
             }
+             
             
             Spacer()
             
@@ -87,7 +89,9 @@ struct ExpenseRowView: View {
                     .font(.footnote)
                     .foregroundColor(.gray)
             }
+             
         }
+         
         .padding()
     }
         
@@ -193,6 +197,7 @@ struct EditView: View {
                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)))
             }
         }
+         
         .padding(20)
         Spacer()
     }
