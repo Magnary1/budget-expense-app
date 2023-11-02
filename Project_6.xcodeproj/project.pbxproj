@@ -19,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		009DE5C02AF42C1800F7053A /* Project-6-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Project-6-Info.plist"; sourceTree = SOURCE_ROOT; };
 		144564302AE0B9BD00FA3001 /* Project_6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project_6.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		144564332AE0B9BD00FA3001 /* __ProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __ProjectApp.swift; sourceTree = "<group>"; };
 		144564352AE0B9BD00FA3001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +62,7 @@
 		144564322AE0B9BD00FA3001 /* Project_6 */ = {
 			isa = PBXGroup;
 			children = (
+				009DE5C02AF42C1800F7053A /* Project-6-Info.plist */,
 				144564332AE0B9BD00FA3001 /* __ProjectApp.swift */,
 				144564352AE0B9BD00FA3001 /* ContentView.swift */,
 				144564412AE0BA2C00FA3001 /* Dashboard.swift */,
@@ -294,9 +296,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Project_6/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Project-6-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -323,9 +325,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Project_6/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Project-6-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
