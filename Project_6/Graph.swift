@@ -26,6 +26,7 @@ struct GraphView: View {
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
         .background(customBackgroundColor)
         .foregroundColor(Color.white)
+        .edgesIgnoringSafeArea(.top)
     }
 }
 

@@ -25,6 +25,16 @@ struct TitleBarView: View {
 }
 
 struct TabBarView: View {
+ 
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor(
+            red: Double(98) / 255.0,
+            green: Double(130) / 255.0,
+            blue: Double(84) / 255.0,
+            alpha: 0.1
+        )
+    }
+
     var body: some View {
         TabView {
             DashboardView()
@@ -34,15 +44,15 @@ struct TabBarView: View {
             
             MergedBudgetExpenseView()
                 .tabItem {
-                    Label("Money?", systemImage: "dollarsign.circle.fill")
+                    Label("Money", systemImage: "dollarsign.circle.fill")
                 }
             
             GraphView()
                 .tabItem {
-                    Label("Graph", systemImage: "list.bullet")
+                    Label("Graph", systemImage: "chart.bar")
                 }
         }
-         
+        .accentColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
     }
 }
 
