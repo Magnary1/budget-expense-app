@@ -32,7 +32,7 @@ enum ActiveSheet: Identifiable {
 struct ExpenseView: View {
     @EnvironmentObject var sharedData: SharedData
     @Binding var activeSheet: ActiveSheet?
-    
+
     let customBackgroundColor = Color(
         red: Double(178) / 255.0,
         green: Double(210) / 255.0,
@@ -45,7 +45,7 @@ struct ExpenseView: View {
                 ForEach(sharedData.expenses.indices, id: \.self) { index in
                     ExpenseRowView(expense: sharedData.expenses[index])
                         .listRowSeparator(.hidden)
-                        .contentShape(Rectangle())  // Make entire row tappable
+                        .contentShape(Rectangle()) // Make entire row tappable
                         .onTapGesture {
                             self.activeSheet = .editExpense(sharedData.expenses[index])
                         }
@@ -54,17 +54,17 @@ struct ExpenseView: View {
                 }
                 .onDelete(perform: deleteExpense)
             }
-            
+
             .listStyle(PlainListStyle())
         }
         .background(customBackgroundColor)
-         
+
         .sheet(item: $activeSheet) { item in
             switch item {
             case .addExpense:
                 EditView(showingForm: .constant(true))
                     .environmentObject(sharedData)
-            case .editExpense(let expense):
+            case let .editExpense(expense):
                 EditView(showingForm: .constant(true), expense: expense)
                     .environmentObject(sharedData)
             }
@@ -88,22 +88,20 @@ struct ExpenseRowView: View {
                     .font(.footnote)
                     .foregroundColor(.gray)
             }
-             
-            
+
             Spacer()
-            
+
             VStack(alignment: .trailing) {
                 Text("$\(String(format: "%.2f", expense.amount))")
                 Text(dateFormatter.string(from: expense.date))
                     .font(.footnote)
                     .foregroundColor(.gray)
             }
-             
         }
-         
+
         .padding()
     }
-        
+
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd"
@@ -120,7 +118,7 @@ struct EditView: View {
     @EnvironmentObject var sharedData: SharedData
     @State private var editingExpense: Expense?
     @Environment(\.presentationMode) var presentationMode
-    
+
     let customBackgroundColor = Color(
         red: Double(178) / 255.0,
         green: Double(210) / 255.0,
@@ -133,20 +131,19 @@ struct EditView: View {
         _expenseAmount = State(initialValue: "")
         _selectedCategoryIndex = State(initialValue: 0)
         _expenseDate = State(initialValue: Date())
-        _editingExpense = State(initialValue: nil) 
+        _editingExpense = State(initialValue: nil)
     }
-    
+
     init(showingForm: Binding<Bool>, expense: Expense) {
         _showingForm = showingForm
         _expenseName = State(initialValue: expense.expenseName)
         _expenseAmount = State(initialValue: String(expense.amount))
         _selectedCategoryIndex = State(initialValue: 0)
         _expenseDate = State(initialValue: expense.date)
-        _editingExpense = State(initialValue: expense)  // Set the expense being edited
+        _editingExpense = State(initialValue: expense) // Set the expense being edited
     }
+
     var body: some View {
-        
-        
         VStack(spacing: 20) {
             Spacer()
             Text(editingExpense == nil ? "Add Expense" : "Edit Expense")
@@ -163,13 +160,13 @@ struct EditView: View {
                 .padding()
                 .foregroundColor(Color.white)
                 .background(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0), lineWidth: 1))
-            
+
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0), lineWidth: 1)
                     .frame(height: 50)
                     .frame(maxWidth: .infinity) // Make sure it takes up all available width
-                
+
                 Picker(selection: $selectedCategoryIndex, label: Text("Category")) {
                     ForEach(sharedData.categories.indices, id: \.self) { index in
                         Text(sharedData.categories[index].type).tag(index)
@@ -179,8 +176,8 @@ struct EditView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
             }
             .onAppear {
-                    selectedCategoryIndex = sharedData.categories.firstIndex { $0.id == editingExpense?.categoryUUID } ?? 0
-                }
+                selectedCategoryIndex = sharedData.categories.firstIndex { $0.id == editingExpense?.categoryUUID } ?? 0
+            }
 
             DatePicker("Date", selection: $expenseDate, displayedComponents: [.date])
                 .font(.headline)
@@ -200,12 +197,12 @@ struct EditView: View {
                         let newExpense = Expense(expenseName: expenseName, categoryUUID: sharedData.categories[selectedCategoryIndex].id, date: expenseDate, amount: amount)
                         sharedData.expenses.append(newExpense)
                     }
-                    
+
                     // Reset the form
                     expenseName = ""
                     expenseAmount = ""
                     expenseDate = Date()
-                    editingExpense = nil  // Reset the editingExpense state
+                    editingExpense = nil // Reset the editingExpense state
                     presentationMode.wrappedValue.dismiss()
                 }
             }) {
@@ -218,10 +215,8 @@ struct EditView: View {
         }
         .background(customBackgroundColor)
         .foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
-        
-         
-        //.padding(20)
-        //Spacer()
-    }
 
+        // .padding(20)
+        // Spacer()
+    }
 }
