@@ -120,6 +120,12 @@ struct EditView: View {
     @EnvironmentObject var sharedData: SharedData
     @State private var editingExpense: Expense?
     @Environment(\.presentationMode) var presentationMode
+    
+    let customBackgroundColor = Color(
+        red: Double(178) / 255.0,
+        green: Double(210) / 255.0,
+        blue: Double(164) / 255.0
+    )
 
     init(showingForm: Binding<Bool>) {
         _showingForm = showingForm
@@ -139,24 +145,28 @@ struct EditView: View {
         _editingExpense = State(initialValue: expense)  // Set the expense being edited
     }
     var body: some View {
+        
+        
         VStack(spacing: 20) {
             Spacer()
             Text(editingExpense == nil ? "Add Expense" : "Edit Expense")
                 .font(.largeTitle)
                 .fontWeight(.bold)
             Spacer()
-            TextField("Expense Name", text: $expenseName)
+            TextField("Expense Name", text: $expenseName, prompt: Text("Expense Name").foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                .foregroundColor(Color.white)
+                .background(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0), lineWidth: 1))
 
-            TextField("Amount", text: $expenseAmount)
+            TextField("Amount", text: $expenseAmount, prompt: Text("Amount").foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .keyboardType(.decimalPad)
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                .foregroundColor(Color.white)
+                .background(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0), lineWidth: 1))
             
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 1)
+                    .stroke(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0), lineWidth: 1)
                     .frame(height: 50)
                     .frame(maxWidth: .infinity) // Make sure it takes up all available width
                 
@@ -206,9 +216,12 @@ struct EditView: View {
                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)))
             }
         }
+        .background(customBackgroundColor)
+        .foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
+        
          
-        .padding(20)
-        Spacer()
+        //.padding(20)
+        //Spacer()
     }
 
 }
