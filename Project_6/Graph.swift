@@ -10,13 +10,22 @@ import Charts
 struct GraphView: View {
     //.background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
 
+    let customBackgroundColor = Color(
+        red: Double(178) / 255.0,
+        green: Double(210) / 255.0,
+        blue: Double(164) / 255.0
+    )
+        
+    
+    
     var body: some View {
         TabView {
             PView()
             Bview()
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-        //.background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
+        .background(customBackgroundColor)
+        .foregroundColor(Color.white)
     }
 }
 
@@ -31,11 +40,14 @@ struct Bview: View {
         let barChartData = [totalIncomeData, totalExpensesData, incomeLeftData]
         VStack{
             TitleBarView(title: "Income Vs Expenses")
+                //.foregroundColor(Color.white)
                 .background(Color.secondary.opacity(0.1))
+                .background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
             Spacer()
             BarChartView(data: barChartData)
             Spacer()
         }
+        
     }
 }
 
@@ -53,7 +65,9 @@ struct BarChartView: View {
                     )
                     
                     
+                    
                 }
+                .foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
               
                 .chartYAxis{
                     AxisMarks(
@@ -108,7 +122,10 @@ struct PView: View {
 
         VStack {
             TitleBarView(title: "Expense Categories")
+               
+                .background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0).ignoresSafeArea(.all, edges: .top))
                 .background(Color.secondary.opacity(0.1))
+                
             Spacer()
             VStack(spacing: 5) {
                 ForEach(sharedData.categories) { category in

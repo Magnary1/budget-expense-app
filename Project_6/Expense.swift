@@ -32,6 +32,12 @@ enum ActiveSheet: Identifiable {
 struct ExpenseView: View {
     @EnvironmentObject var sharedData: SharedData
     @Binding var activeSheet: ActiveSheet?
+    
+    let customBackgroundColor = Color(
+        red: Double(178) / 255.0,
+        green: Double(210) / 255.0,
+        blue: Double(164) / 255.0
+    )
 
     var body: some View {
         VStack {
@@ -43,12 +49,15 @@ struct ExpenseView: View {
                         .onTapGesture {
                             self.activeSheet = .editExpense(sharedData.expenses[index])
                         }
+                        .listRowBackground(customBackgroundColor)
                         .environmentObject(sharedData)
                 }
                 .onDelete(perform: deleteExpense)
             }
+            
             .listStyle(PlainListStyle())
         }
+        .background(customBackgroundColor)
          
         .sheet(item: $activeSheet) { item in
             switch item {

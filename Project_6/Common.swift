@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct TitleBarView: View {
+    
     var title: String
     
     var body: some View {
@@ -47,14 +48,22 @@ struct TabBarView: View {
 
 
 struct MergedBudgetExpenseView: View {
+
     @State private var selectedView: ViewType = .budget
     @State private var showingAddForm = false
     @State private var activeSheet: ActiveSheet?
     enum ViewType {
         case budget, expense
     }
+    let customBackgroundColor = Color(
+        red: Double(178) / 255.0,
+        green: Double(210) / 255.0,
+        blue: Double(164) / 255.0
+    )
 
     var body: some View {
+       
+
         VStack(spacing: 0) {
             HStack {
                 TitleBarView(title: selectedView == .budget ? "Budget" : "Expenses")
@@ -72,14 +81,21 @@ struct MergedBudgetExpenseView: View {
                         .frame(width: 20, height: 20)
                         .padding()
                 })
+                
+                
+                
             }
-             
+            .foregroundColor(Color.white)
+            .background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
             .background(Color.secondary.opacity(0.1))
 
             Picker("", selection: $selectedView) {
                 Text("Budget").tag(ViewType.budget)
+                    .foregroundColor(Color.white)
                 Text("Expenses").tag(ViewType.expense)
+                    .foregroundColor(Color.white)
             }
+            .colorMultiply(customBackgroundColor)
             .pickerStyle(SegmentedPickerStyle())
             .padding()
              
@@ -91,6 +107,8 @@ struct MergedBudgetExpenseView: View {
                 ExpenseView(activeSheet: $activeSheet)
             }
         }
+        .foregroundColor(Color.white)
+        .background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
          
     }
 }

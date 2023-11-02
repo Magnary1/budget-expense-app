@@ -9,10 +9,19 @@ import Foundation
 import SwiftUI
 
 struct DashboardView: View {
+    
+    let customBackgroundColor = Color(
+        red: Double(178) / 255.0,
+        green: Double(210) / 255.0,
+        blue: Double(164) / 255.0
+    )
+    
     var body: some View {
         VStack {
             TitleBarView(title: "Dashboard")
+                .background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
                 .background(Color.secondary.opacity(0.1))
+                .foregroundColor(Color.white)
             Spacer()
             OverviewView()
             Spacer()
@@ -22,6 +31,7 @@ struct DashboardView: View {
             Spacer()
             SavingsTrackerView()
         }
+        .background(customBackgroundColor)
          
 
     }
@@ -36,6 +46,7 @@ struct OverallBudgetMeter: View {
         VStack(spacing: 10) {
             Text("Budget Meter")
                 .font(.title)
+                .foregroundColor(Color.white)
             
             ProgressMeter(value: sharedData.totalExpenses / sharedData.totalIncome)
                 .frame(height: 30)
@@ -69,8 +80,9 @@ struct BudgetCategoryCard: View {
             ProgressMeter(value: spentAmount / category.budget)
                             .frame(height: 20)
         }
+        .foregroundColor(Color.white)
         .padding()
-        .background(Color.white)
+        .background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
         .cornerRadius(10)
         .shadow(radius: 5)
     }
@@ -102,11 +114,15 @@ struct BudgetCategoriesOverview: View {
                 ForEach(sharedData.categories, id: \.id) { category in
                     BudgetCategoryCard(category: category)
                         .frame(width: 200)
+                    
                 }
+                
             }
+            
             .padding(.horizontal)
             .padding(.vertical)
         }
+        
     }
 }
 
@@ -165,6 +181,7 @@ struct OverviewView: View {
                 Text("$\(sharedData.incomeLeft, specifier: "%.2f")")
             }   
         }
+        .foregroundColor(Color.white)
         .padding()
     }
 }
@@ -177,6 +194,7 @@ struct SavingsTrackerView: View {
         VStack(spacing: 20) {
             Text("Savings Goal: \(data.savingsGoal.label)")
                 .font(.title)
+                .foregroundColor(Color.white)
 
             // Progress bar
             GeometryReader { geometry in

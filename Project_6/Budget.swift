@@ -8,12 +8,14 @@
 import Foundation
 import SwiftUI
 
+
+
 struct Category: Identifiable {
     var id = UUID()
     var type: String
     var budget: Double
 }
-struct BudgetView: View {
+struct  BudgetView: View {
     @Binding var showingAddForm: Bool
     @State private var selectedCategory: Category?
     @EnvironmentObject var sharedData: SharedData
@@ -21,6 +23,12 @@ struct BudgetView: View {
     @State private var inputBudget: String = ""
     @State private var showingAlert = false
     @State private var indexSetToDelete: IndexSet?
+    
+    let customBackgroundColor = Color(
+        red: Double(178) / 255.0,
+        green: Double(210) / 255.0,
+        blue: Double(164) / 255.0
+    )
 
     var body: some View {
         VStack {
@@ -36,9 +44,12 @@ struct BudgetView: View {
                         .listRowSeparator(.hidden)
                 }
                 .onDelete(perform: deleteCategory)
+                .listRowBackground(customBackgroundColor)
             }
             .listStyle(PlainListStyle())
+            
         }
+        .background(customBackgroundColor)
          
         .sheet(isPresented: $showingAddForm, content: {
             EditCategoryView(showingForm: $showingAddForm)
@@ -90,6 +101,7 @@ struct CategoryRowView: View {
             Spacer()
             Text("$\(String(format: "%.2f", category.budget))")
         }
+        .foregroundColor(Color.white)
          
         .padding()
         .contentShape(Rectangle())  // Make entire row tappable
@@ -117,6 +129,13 @@ struct EditCategoryView: View {
     }
     
     var body: some View {
+        
+        let customBackgroundColor = Color(
+            red: Double(178) / 255.0,
+            green: Double(210) / 255.0,
+            blue: Double(164) / 255.0
+        )
+        
         VStack(spacing: 20) {
             Spacer()
 
@@ -126,14 +145,17 @@ struct EditCategoryView: View {
             Text("Income not allocated: $\(String(format: "%.2f", sharedData.incomeLeft))")
             Spacer()
 
-            TextField("Category Type", text: $categoryType)
+            TextField("Category Type", text: $categoryType, prompt: Text("Category Type").foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                //.background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
+                .foregroundColor(Color.white)
+                .background(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0), lineWidth: 1))
             
-            TextField("Amount", text: $categoryAmount)
+            TextField("Amount", text: $categoryAmount, prompt: Text("Amount").foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .keyboardType(.decimalPad)
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                .foregroundColor(Color.white)
+                .background(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0), lineWidth: 1))
             Spacer()
 
             Button(action: {
@@ -157,10 +179,16 @@ struct EditCategoryView: View {
                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)))
             }
         }
-         
+        
+        
+        .foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
         .padding(20)
-        Spacer()
+        .background(customBackgroundColor)
+        
+        //Spacer()
+            
     }
+    
 }
 
 
@@ -193,6 +221,7 @@ struct TotalBudgetView: View {
                     .onAppear {
                         inputBudget = "\(totalBudget)"
                     }
+                    //.background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
 
                 Button(action: {
                     if let newBudget = Double(inputBudget) {
@@ -212,6 +241,8 @@ struct TotalBudgetView: View {
                     }
             }
         }
+        .foregroundColor(Color.white)
+        //.background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
          
         .padding(.horizontal)
         .frame(height: 50)
