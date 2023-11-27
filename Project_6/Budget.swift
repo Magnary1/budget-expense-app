@@ -98,7 +98,7 @@ struct CategoryRowView: View {
             Spacer()
             Text("$\(String(format: "%.2f", category.budget))")
         }
-        .foregroundColor(Color.white)
+        .foregroundColor(Color.black)
 
         .padding()
         .contentShape(Rectangle()) // Make entire row tappable
@@ -143,13 +143,13 @@ struct EditCategoryView: View {
             TextField("Category Type", text: $categoryType, prompt: Text("Category Type").foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .padding()
                 // .background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
-                .foregroundColor(Color.white)
+                .foregroundColor((Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .background(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0), lineWidth: 1))
 
             TextField("Amount", text: $categoryAmount, prompt: Text("Amount").foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .keyboardType(.decimalPad)
                 .padding()
-                .foregroundColor(Color.white)
+                .foregroundColor((Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .background(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0), lineWidth: 1))
             Spacer()
 
@@ -232,7 +232,7 @@ struct TotalBudgetView: View {
                     }
             }
         }
-        .foregroundColor(Color.white)
+        .foregroundColor(Color.black)
         // .background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
 
         .padding(.horizontal)

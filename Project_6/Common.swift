@@ -107,7 +107,7 @@ struct MergedBudgetExpenseView: View {
                 ExpenseView(activeSheet: $activeSheet)
             }
         }
-        .foregroundColor(Color.white)
+        .foregroundColor(Color.black)
         .background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
     }
 }

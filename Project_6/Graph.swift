@@ -23,7 +23,7 @@ struct GraphView: View {
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
         .background(customBackgroundColor)
-        .foregroundColor(Color.white)
+        .foregroundColor(Color.black)
         .edgesIgnoringSafeArea(.top)
     }
 }
@@ -42,6 +42,7 @@ struct Bview: View {
                 // .foregroundColor(Color.white)
                 .background(Color.secondary.opacity(0.1))
                 .background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
+                .foregroundColor(Color.white)
             Spacer()
             BarChartView(data: barChartData)
             Spacer()
@@ -116,6 +117,7 @@ struct PView: View {
 
                 .background(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0).ignoresSafeArea(.all, edges: .top))
                 .background(Color.secondary.opacity(0.1))
+                .foregroundColor(Color.white)
 
             Spacer()
             VStack(spacing: 5) {

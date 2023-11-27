@@ -152,13 +152,13 @@ struct EditView: View {
             Spacer()
             TextField("Expense Name", text: $expenseName, prompt: Text("Expense Name").foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .padding()
-                .foregroundColor(Color.white)
+                .foregroundColor((Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .background(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0), lineWidth: 1))
 
             TextField("Amount", text: $expenseAmount, prompt: Text("Amount").foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .keyboardType(.decimalPad)
                 .padding()
-                .foregroundColor(Color.white)
+                .foregroundColor((Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .background(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0), lineWidth: 1))
 
             ZStack {

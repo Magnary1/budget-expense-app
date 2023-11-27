@@ -41,7 +41,7 @@ struct OverallBudgetMeter: View {
         VStack(spacing: 10) {
             Text("Budget Meter")
                 .font(.title)
-                .foregroundColor(Color.white)
+                .foregroundColor(Color.black)
 
             ProgressMeter(value: sharedData.totalExpenses / sharedData.totalIncome)
                 .frame(height: 30)
@@ -170,7 +170,7 @@ struct OverviewView: View {
                 Text("$\(sharedData.incomeLeft, specifier: "%.2f")")
             }
         }
-        .foregroundColor(Color.white)
+        .foregroundColor(Color.black)
         .padding()
     }
 }
@@ -183,7 +183,7 @@ struct SavingsTrackerView: View {
         VStack(spacing: 20) {
             Text("Savings Goal: \(data.savingsGoal.label)")
                 .font(.title)
-                .foregroundColor(Color.white)
+                .foregroundColor(Color.black)
 
             // Progress bar
             GeometryReader { geometry in
@@ -255,19 +255,19 @@ struct SavingsGoalSheet: View {
 
             TextField("Goal (e.g., Car, Travel)", text: $label, prompt: Text("Goal (e.g., Car, Travel)").foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .padding()
-                .foregroundColor(Color.white)
+                .foregroundColor(Color.black)
                 .background(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0), lineWidth: 1))
 
             TextField("Total Amount", text: $totalAmount, prompt: Text("Total Amount").foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .keyboardType(.decimalPad)
                 .padding()
-                .foregroundColor(Color.white)
+                .foregroundColor(Color.black)
                 .background(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0), lineWidth: 1))
 
             TextField("Add/Remove From Savings", text: $addingAmount, prompt: Text("Add/Remove From Savings").foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .keyboardType(.decimalPad)
                 .padding()
-                .foregroundColor(Color.white)
+                .foregroundColor(Color.black)
                 .background(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0), lineWidth: 1))
 
             Spacer()
