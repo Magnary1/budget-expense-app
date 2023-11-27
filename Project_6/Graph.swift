@@ -94,22 +94,39 @@ struct PView: View {
 
     var body: some View {
         let knownCategoryColors: [String: Color] = [
-            "Living": .red,
-            "Groceries": .blue,
-            "Utilities": .yellow,
-            "Entertainment": .purple,
-        ]
+                    "Living": .red,
+                    "Groceries": .blue,
+                    "Utilities": .yellow,
+                    "Entertainment": .purple,
+                ]
 
-        // Map categories to colors or use a default color for new categories
-        let data: [(Double, Color)] = sharedData.categories.map { category in
-            if let color = knownCategoryColors[category.type] {
-                return (category.budget, color)
-            } else {
-                // You can use a default color for new categories, for example, .pink
-                return (category.budget, .pink)
-            }
-        }
+                // Maintain a counter for new categories
+                var newCategoryCounter = 0
 
+                // Map categories to colors or use a default color for new categories
+                let data: [(Double, Color)] = sharedData.categories.map { category in
+                    if let color = knownCategoryColors[category.type] {
+                        return (category.budget, color)
+                    } else {
+                        // Assign colors based on the new category counter
+                        let newColor: Color
+                        switch newCategoryCounter {
+                        case 0:
+                            newColor = .pink
+                        case 1:
+                            newColor = .orange
+                        case 2:
+                            newColor = .gray
+                        default:
+                            newColor = .pink
+                        }
+
+                        // Increment the counter for the next new category
+                        newCategoryCounter += 1
+
+                        return (category.budget, newColor)
+                    }
+                }
         let totalExpenses = sharedData.totalExpenses
 
         VStack {
