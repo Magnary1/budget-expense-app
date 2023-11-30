@@ -6,20 +6,25 @@
 //
 
 import SwiftUI
+// Pre create uuids for the categories
 let uuids = (1 ... 5).map { _ in UUID() }
 
+
+// Preset savings goal with savings data
 struct SavingsGoal {
-    var label: String = ""
-    var totalAmount: Double = 0.0
-    var savedAmount: Double = 0.0
+    var label: String = "Car"
+    var totalAmount: Double = 20000.0
+    var savedAmount: Double = 3500.0
 }
 
+// Holds general user data as well as helper functions to perform on the data itself.
 class SharedData: ObservableObject {
     @Published var categories: [Category] = [
         Category(id: uuids[0], type: "Living", budget: 1200.00),
         Category(id: uuids[1], type: "Groceries", budget: 250.00),
         Category(id: uuids[2], type: "Utilities", budget: 150.00),
         Category(id: uuids[3], type: "Entertainment", budget: 75.00),
+        Category(id: uuids[4], type: "General Savings", budget: 300),
     ]
 
     @Published var expenses: [Expense] = [
@@ -28,6 +33,7 @@ class SharedData: ObservableObject {
         Expense(expenseName: "Electricity", categoryUUID: uuids[2], date: Date(), amount: 200.75),
         Expense(expenseName: "Movie", categoryUUID: uuids[3], date: Date(), amount: 50.25),
         Expense(expenseName: "Concert", categoryUUID: uuids[3], date: Date(), amount: 175.00),
+        Expense(expenseName: "401k", categoryUUID: uuids[4], date: Date(), amount: 175.00),
     ]
 
     @Published var totalIncome: Double = 2000.00

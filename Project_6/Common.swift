@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+// Reused by each tab to have similar titles
 struct TitleBarView: View {
     var title: String
 
@@ -22,6 +23,7 @@ struct TitleBarView: View {
     }
 }
 
+// Tab view to navigate between dashboard, money, and grab tabs
 struct TabBarView: View {
     init() {
         UITabBar.appearance().backgroundColor = UIColor(
@@ -53,6 +55,7 @@ struct TabBarView: View {
     }
 }
 
+// Budget and Expense view behave very similarly, so use the same struct to make changes simpler.
 struct MergedBudgetExpenseView: View {
     @State private var selectedView: ViewType = .budget
     @State private var showingAddForm = false

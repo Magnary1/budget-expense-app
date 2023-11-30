@@ -72,7 +72,8 @@ struct BudgetView: View {
 
     func deleteCategory(at offsets: IndexSet) {
         guard let index = offsets.first else { return }
-
+        
+        // Checks if a warning should be displayed when deleting a category, or just actually delete it.
         if sharedData.checkIfCategoryIsUsedByExpense(categoryId: sharedData.categories[index].id) {
             showingAlert = true
             indexSetToDelete = offsets
@@ -81,6 +82,7 @@ struct BudgetView: View {
         }
     }
 
+    // Deletes category after popup agreement.
     func actuallyDeleteCategory() {
         guard let offsets = indexSetToDelete else { return }
 
@@ -134,6 +136,7 @@ struct EditCategoryView: View {
         VStack(spacing: 20) {
             Spacer()
 
+            // Trying to reuse code for Add's and Edit's so changes are simpler.
             Text(categoryToEdit == nil ? "Add Category" : "Edit Category")
                 .font(.largeTitle)
                 .fontWeight(.bold)

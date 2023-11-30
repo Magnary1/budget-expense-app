@@ -15,6 +15,7 @@ struct DashboardView: View {
         blue: Double(164) / 255.0
     )
 
+    // The main view for the dashboard
     var body: some View {
         VStack {
             TitleBarView(title: "Dashboard")
@@ -231,7 +232,9 @@ struct SavingsTrackerView: View {
     }
 }
 
+// This is the popup to choose savings information
 struct SavingsGoalSheet: View {
+    // Need to access shared data to prepopulate existing savings information.
     @EnvironmentObject var sharedData: SharedData
     @Environment(\.presentationMode) var presentationMode
 
@@ -252,7 +255,8 @@ struct SavingsGoalSheet: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
             Spacer()
-
+            
+            // Text fields for the user to enter their data.
             TextField("Goal (e.g., Car, Travel)", text: $label, prompt: Text("Goal (e.g., Car, Travel)").foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0)))
                 .padding()
                 .foregroundColor(Color.black)
@@ -272,6 +276,7 @@ struct SavingsGoalSheet: View {
 
             Spacer()
 
+            // Only allows the user to update savings if all fields are entered.
             Button(action: {
                 if let total = Double(totalAmount), let addAmount = Double(addingAmount) {
                     sharedData.savingsGoal.label = label
@@ -290,7 +295,6 @@ struct SavingsGoalSheet: View {
         }
         .foregroundColor(Color(red: 12 / 255.0, green: 69 / 255.0, blue: 42 / 255.0))
         .background(customBackgroundColor)
-        // .padding(20)
         .onAppear {
             label = sharedData.savingsGoal.label
             totalAmount = sharedData.savingsGoal.totalAmount == 0 ? "" : String(sharedData.savingsGoal.totalAmount)

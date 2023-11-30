@@ -125,6 +125,7 @@ struct EditView: View {
         blue: Double(164) / 255.0
     )
 
+    // Initialization for Adds
     init(showingForm: Binding<Bool>) {
         _showingForm = showingForm
         _expenseName = State(initialValue: "")
@@ -134,6 +135,7 @@ struct EditView: View {
         _editingExpense = State(initialValue: nil)
     }
 
+    // Initialization for Edits
     init(showingForm: Binding<Bool>, expense: Expense) {
         _showingForm = showingForm
         _expenseName = State(initialValue: expense.expenseName)
