@@ -98,6 +98,7 @@ struct PView: View {
                     "Groceries": .blue,
                     "Utilities": .yellow,
                     "Entertainment": .purple,
+                    "General Savings": .mint,
                 ]
 
                 // Maintain a counter for new categories
